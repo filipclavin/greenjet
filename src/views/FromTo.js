@@ -1,8 +1,9 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useRef } from 'react'
 import Calendar from 'react-calendar';
 
 import { ReactComponent as Logo } from '../resources/logo.svg'
-import { Wrapper, Selection, Info } from './style.js'
+import { Wrapper, First, Second, Info } from './style.js'
+import NextButton from '../commonSC/NextButton';
 
 
 const FromTo = () => {
@@ -12,7 +13,7 @@ const FromTo = () => {
     const [passengerNum, setPassengerNum] = useState('1')
     const [formFilled, setFormFilled] = useState(false)
     const [step, setStep] = useState(1)
-    const [value, onChange] = useState(new Date());
+    const [value, onChange] = useState();
 
     useEffect(() => {
         if (dept && dest && passengerNum > 0) {
@@ -22,14 +23,18 @@ const FromTo = () => {
         }
     }, [dept, dest, passengerNum])
 
+    useEffect(() => {
+        console.log(value)
+    })
+
     const handleSubmit = e => {
         e.preventDefault()
         setStep(2)
     }
 
     return (
-        <Wrapper>
-            <Selection formFilled={formFilled} passengerNum={passengerNum} step={step}>
+        <Wrapper step={step}>
+            <First formFilled={formFilled} passengerNum={passengerNum} step={step}>
                 <Logo />
                 <form onSubmit={handleSubmit}>
                     <input value={dept} type="text" placeholder="Från?" onInput={e => setDept(e.target.value)} />
@@ -39,23 +44,31 @@ const FromTo = () => {
                         <br />
                         <input name="passengers" id="passengers" value={passengerNum} onFocus={e => e.target.select()} onInput={e => { /^([0-9]*)$/.test(e.target.value) ? setPassengerNum(e.target.value) : setPassengerNum(passengerNum) }} />
                     </label>
-                    <button type="submit" disabled={!formFilled}>Nästa</button>
+                    <NextButton type="submit" disabled={!formFilled}>Nästa</NextButton>
                 </form>
-            </Selection>
-            {step === 1 ? <Info>
-                <span>Res med gott samvete med GreenJet.</span>
-                <br />
-                Låt oss boka resa klimatkompenserat så enkelt som möjligt för dig och dina medresenärer.
-                <br />
-                <br />
-                Res endast om du är frisk, undvik rusningstrafik om du har möjlighet och följ anvisningar ombord.
-            </Info>
-                :
-                <Calendar
-                    onChange={onChange}
-                    value={value}
-                />
-            }
+            </First>
+            <Second>
+                {step === 1 ?
+                    <Info>
+                        <span>Res med gott samvete med GreenJet.</span>
+                        <br />
+                        <p>Låt oss boka resa klimatkompenserat så enkelt som möjligt för dig och dina medresenärer.</p>
+                        <br />
+                        <p>Res endast om du är frisk, undvik rusningstrafik om du har möjlighet och följ anvisningar ombord.</p>
+                    </Info>
+                    :
+                    <>
+                        <Calendar
+                            onChange={onChange}
+                            value={value}
+                            formatShortWeekday={(locale, date) => ['SÖN', 'MÅN', 'TIS', 'ONS', 'TOR', 'FRE', 'LÖR'][date.getDay()]}
+                            selectRange
+                        />
+                        <NextButton>Nästa</NextButton>
+                    </>
+                }
+
+            </Second>
         </Wrapper>
     )
 }
