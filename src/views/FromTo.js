@@ -1,9 +1,9 @@
-import { useEffect, useState, useRef } from 'react'
-import Calendar from 'react-calendar';
+import { useEffect, useState } from 'react'
 
 import { ReactComponent as Logo } from '../resources/logo.svg'
 import { Wrapper, First, Second, Info } from './style.js'
-import NextButton from '../commonSC/NextButton';
+import NextButton from '../StyledComponents/NextButton';
+import StyledCalendar from '../StyledComponents/StyledCalendar';
 
 
 const FromTo = () => {
@@ -58,11 +58,16 @@ const FromTo = () => {
                     </Info>
                     :
                     <>
-                        <Calendar
+                        <StyledCalendar
                             onChange={onChange}
                             value={value}
                             formatShortWeekday={(locale, date) => ['SÖN', 'MÅN', 'TIS', 'ONS', 'TOR', 'FRE', 'LÖR'][date.getDay()]}
                             selectRange
+                            tileClassName={({ activeStartDate, date, view }) =>
+                                view === "month" ?
+                                    date.getDay() === 1 ? "monday" :
+                                        date.getDay() === 0 ? "sunday" : null : null
+                            }
                         />
                         <NextButton>Nästa</NextButton>
                     </>
