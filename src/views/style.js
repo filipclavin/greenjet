@@ -74,9 +74,8 @@ export const First = styled.section`
 export const Second = styled.section`
     display: flex;
     flex-direction: column;
-    justify-content: space-evenly;
+    justify-content: center;
     align-items: center;
-    padding-bottom: 20px;
     flex-grow: 1;
 `
 

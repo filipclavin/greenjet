@@ -13,7 +13,7 @@ const FromTo = () => {
     const [passengerNum, setPassengerNum] = useState('1')
     const [formFilled, setFormFilled] = useState(false)
     const [step, setStep] = useState(1)
-    const [value, onChange] = useState();
+    const [dateRange, setDateRange] = useState();
 
     useEffect(() => {
         if (dept && dest && passengerNum > 0) {
@@ -24,7 +24,7 @@ const FromTo = () => {
     }, [dept, dest, passengerNum])
 
     useEffect(() => {
-        console.log(value)
+        console.log(dateRange)
     })
 
     const handleSubmit = e => {
@@ -59,8 +59,8 @@ const FromTo = () => {
                     :
                     <>
                         <StyledCalendar
-                            onChange={onChange}
-                            value={value}
+                            onChange={setDateRange}
+                            value={dateRange}
                             minDate={new Date()}
                             formatMonth={(locale, date) => ['Januari', 'Februari', 'Mars', 'April', 'Maj', 'Juni', 'Juli', 'Augusti', 'September', 'Oktober', 'November', 'December'][date.getMonth()]}
                             formatMonthYear={(locale, date) => `${['Jan', 'Feb', 'Mar', 'Apr', 'Maj', 'Jun', 'Jul', 'Aug', 'Sep', 'Okt', 'Nov', 'Dec'][date.getMonth()]} ${date.getFullYear()}`}
@@ -73,7 +73,7 @@ const FromTo = () => {
                                         date.getDay() === 0 ? "sunday" : null : null
                             }
                         />
-                        <NextButton>Nästa</NextButton>
+                        <NextButton disabled={!dateRange}>Nästa</NextButton>
                     </>
                 }
 
