@@ -13,8 +13,20 @@ const StyledCalendar = styled(Calendar)`
     line-height: 16px;
 
     .react-calendar__navigation {
-        height: 32px;
-        margin-bottom: 7px;
+        height: 12%;
+        width: 52%;
+        margin: 0 auto 2.5% auto;
+
+        .react-calendar__navigation__arrow {
+            display: none;
+        }
+
+        .react-calendar__navigation__label {
+            background-color: white;
+            font-size: 16px;
+            border: none;
+            border-radius: 100px;
+        }
     }
 
     .react-calendar__month-view__weekdays {
@@ -48,6 +60,10 @@ const StyledCalendar = styled(Calendar)`
             padding: 0;
             border: none;
             border-radius: 100%;
+
+            :disabled {
+                color: #7A758580;
+            }
 
             abbr {
                 display: flex;

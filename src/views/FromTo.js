@@ -61,6 +61,8 @@ const FromTo = () => {
                         <StyledCalendar
                             onChange={onChange}
                             value={value}
+                            minDate={new Date()}
+                            formatMonthYear={(locale, date) => `${['Dec', 'Jan', 'Feb', 'Mar', 'Apr', 'Maj', 'Jun', 'Jul', 'Aug', 'Okt', 'Nov'][date.getMonth()]} ${date.getFullYear()}`}
                             formatShortWeekday={(locale, date) => ['SÖN', 'MÅN', 'TIS', 'ONS', 'TOR', 'FRE', 'LÖR'][date.getDay()]}
                             selectRange
                             tileClassName={({ activeStartDate, date, view }) =>
