@@ -77,6 +77,10 @@ export const Second = styled.section`
     justify-content: center;
     align-items: center;
     flex-grow: 1;
+
+    > button {
+        margin-top: 46px;
+    }
 `
 
 export const Info = styled.p`

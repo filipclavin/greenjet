@@ -67,7 +67,7 @@ const FromTo = () => {
                             formatShortWeekday={(locale, date) => ['SÖN', 'MÅN', 'TIS', 'ONS', 'TOR', 'FRE', 'LÖR'][date.getDay()]}
                             selectRange
                             showFixedNumberOfWeeks
-                            tileClassName={({ activeStartDate, date, view }) =>
+                            tileClassName={({ date, view }) =>
                                 view === "month" ?
                                     date.getDay() === 1 ? "monday" :
                                         date.getDay() === 0 ? "sunday" : null : null

@@ -64,10 +64,14 @@ const StyledCalendar = styled(Calendar)`
             }
 
             .react-calendar__month-view__days {
-
+                
                 .react-calendar__tile{
+                    :nth-child(-n+7) {
+                        margin: 0;
+                    }
+                    
                     aspect-ratio: 1;
-                    margin-bottom: 2.5%;
+                    margin-top: 2.5%;
                     font-weight: 500;
                     font-size: 14px;
                     background-color: rgba(0, 0, 0, 0);
@@ -127,6 +131,23 @@ const StyledCalendar = styled(Calendar)`
                         &.sunday:not(.react-calendar__tile--rangeStart) {
                             border-radius: 0 50% 50% 0;
                         }
+                    }
+                }
+            }
+        }
+
+        .react-calendar__year-view, .react-calendar__decade-view, .react-calendar__century-view {
+
+            > * {
+                aspect-ratio: 420 / 412.5;
+                justify-content: center;
+
+                > * {
+                    border: 1px solid #00000080;
+                    
+                    &:not(:disabled):hover {
+                        cursor: pointer;
+                        background-color: #39B7D480;;
                     }
                 }
             }
