@@ -62,9 +62,11 @@ const FromTo = () => {
                             onChange={onChange}
                             value={value}
                             minDate={new Date()}
-                            formatMonthYear={(locale, date) => `${['Dec', 'Jan', 'Feb', 'Mar', 'Apr', 'Maj', 'Jun', 'Jul', 'Aug', 'Okt', 'Nov'][date.getMonth()]} ${date.getFullYear()}`}
+                            formatMonth={(locale, date) => ['Januari', 'Februari', 'Mars', 'April', 'Maj', 'Juni', 'Juli', 'Augusti', 'September', 'Oktober', 'November', 'December'][date.getMonth()]}
+                            formatMonthYear={(locale, date) => `${['Jan', 'Feb', 'Mar', 'Apr', 'Maj', 'Jun', 'Jul', 'Aug', 'Sep', 'Okt', 'Nov', 'Dec'][date.getMonth()]} ${date.getFullYear()}`}
                             formatShortWeekday={(locale, date) => ['SÖN', 'MÅN', 'TIS', 'ONS', 'TOR', 'FRE', 'LÖR'][date.getDay()]}
                             selectRange
+                            showFixedNumberOfWeeks
                             tileClassName={({ activeStartDate, date, view }) =>
                                 view === "month" ?
                                     date.getDay() === 1 ? "monday" :

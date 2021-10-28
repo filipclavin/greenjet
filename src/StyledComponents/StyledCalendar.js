@@ -106,11 +106,11 @@ const StyledCalendar = styled(Calendar)`
                     border-radius: 100%;
                 }
 
-                &.monday {
+                &.monday:not(.react-calendar__tile--rangeEnd) {
                     border-radius: 50% 0 0 50%;
                 }
 
-                &.sunday {
+                &.sunday:not(.react-calendar__tile--rangeStart) {
                     border-radius: 0 50% 50% 0;
                 }
             }
