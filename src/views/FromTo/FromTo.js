@@ -5,34 +5,46 @@ import { Wrapper, First, Second, Info } from './style.js'
 import NextButton from '../../StyledComponents/NextButton';
 import StyledCalendar from '../../StyledComponents/StyledCalendar';
 
+const airports = require('../../airports.json')
+const sweAirports = require('../../airports-se.json')
 
 const FromTo = () => {
 
     const [dept, setDept] = useState('')
     const [dest, setDest] = useState('')
+    const [showDeptList, setShowDeptList] = useState('')
+    const [showDestList, setShowDestList] = useState('')
     const [passengerNum, setPassengerNum] = useState('1')
-    const [formFilled, setFormFilled] = useState(false)
     const [step, setStep] = useState(1)
     const [dateRange, setDateRange] = useState();
-    const [airportList, setAirportList] = useState()
 
-    useEffect(() => {
-        const getAirportList = async () => {
-            fetch('')
-        }
-    }, [])
+    const filterAirports = (str) => {
+        const query = str.toLocaleLowerCase()
 
-    useEffect(() => {
-        if (dept && dest && passengerNum > 0) {
-            setFormFilled(true)
-        } else {
-            setFormFilled(false)
-        }
-    }, [dept, dest, passengerNum])
+        return airports.filter(item => {
+            return (
+                item.city.toLocaleLowerCase().startsWith(query) ||
+                item.country.toLocaleLowerCase().startsWith(query) ||
+                item.name.toLocaleLowerCase().startsWith(query) ||
+                item.iata_code.toLocaleLowerCase().startsWith(query) ||
 
-    useEffect(() => {
-        console.log(dateRange)
-    })
+                sweAirports[airports.indexOf(item)].city.toLocaleLowerCase().startsWith(query) ||
+                sweAirports[airports.indexOf(item)].country.toLocaleLowerCase().startsWith(query) ||
+                item.name.toLocaleLowerCase().startsWith(query)
+            )
+        })
+    }
+
+    const renderAirports = (str, dataState, styleState) => {
+        return filterAirports(str).map(item => {
+            return str.length < 3 ? null : (
+                <option key={item.iata_code} value={item.name} onClick={() => {
+                    dataState(`${item.name}, ${sweAirports[airports.indexOf(item)].city} - ${item.iata_code}`)
+                    styleState(false)
+                }}>{item.name}, {sweAirports[airports.indexOf(item)].city} - {item.iata_code}</option>
+            )
+        })
+    }
 
     const handleSubmit = e => {
         e.preventDefault()
@@ -41,17 +53,37 @@ const FromTo = () => {
 
     return (
         <Wrapper step={step}>
-            <First formFilled={formFilled} passengerNum={passengerNum} step={step}>
+            <First passengerNum={passengerNum} step={step}>
                 <Logo />
                 <form onSubmit={handleSubmit}>
-                    <input value={dept} type="text" placeholder="Från?" onInput={e => setDept(e.target.value)} />
-                    <input value={dest} type="text" placeholder="Till?" onInput={e => setDest(e.target.value)} />
+                    <input
+                        type="text"
+                        placeholder="Från?"
+                        value={dept}
+                        onClick={() => setShowDeptList(true)}
+                        onInput={e => setDept(e.target.value)} />
+                    <datalist className={showDeptList ? 'show-list' : null}>
+                        <div>
+                            {renderAirports(dept, setDept, setShowDeptList)}
+                        </div>
+                    </datalist>
+                    <input
+                        type="text"
+                        placeholder="Till?"
+                        value={dest}
+                        onClick={() => setShowDestList(true)}
+                        onInput={e => setDest(e.target.value)} />
+                    <datalist className={showDestList ? 'show-list' : null}>
+                        <div>
+                            {renderAirports(dest, setDest, setShowDestList)}
+                        </div>
+                    </datalist>
                     <label htmlFor="passengers">
                         Antal Resenärer:
                         <br />
                         <input name="passengers" id="passengers" value={passengerNum} onFocus={e => e.target.select()} onInput={e => { /^([0-9]*)$/.test(e.target.value) ? setPassengerNum(e.target.value) : setPassengerNum(passengerNum) }} />
                     </label>
-                    <NextButton type="submit" disabled={!formFilled}>Nästa</NextButton>
+                    <NextButton type="submit" disabled={!dept || !dest || !passengerNum}>Nästa</NextButton>
                 </form>
             </First>
             <Second>

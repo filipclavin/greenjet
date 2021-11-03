@@ -20,7 +20,6 @@ export const First = styled.section`
     box-shadow: 0px 3px 22px 1px rgba(0, 0, 0, 0.25);
     padding: 5px 0;
     color: white;
-    overflow: hidden;
     
     transition: height 0.3s;
     
@@ -37,20 +36,52 @@ export const First = styled.section`
         flex-direction: column;
         margin: 0 auto;
         
-        * {
-            font-size: 18px;
+        input, label {
             margin: 7.5px 0;
-            border: none;
         }
         
         input {
             background-color: #128DA1;
             padding: 10px;
             color: white;
+            font-size: 18px;
+            border: none;
             
             ::placeholder {
                 color: white;
             }
+
+            :focus {
+                outline: none;
+            } 
+        }
+        
+        datalist {
+            box-sizing: border-box;
+            position: relative;
+            top: -7.5px;
+            height: 0;
+            margin: 0;
+
+            div {
+                overflow-y: auto;
+                max-height: 300px;
+            }
+            
+            option {
+                padding: 10px;
+                background-color: whitesmoke;
+                border-bottom: solid 1px #00000040;
+                color: #595959;
+                
+                :hover {
+                    cursor: pointer;
+                }
+            }
+        }
+
+        .show-list {
+            display: block;
         }
 
         #passengers {
