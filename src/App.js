@@ -1,7 +1,7 @@
 import { createGlobalStyle } from 'styled-components'
 import reset from 'styled-reset'
 
-import FromTo from "./views/FromTo";
+import FromTo from "./views/FromTo/FromTo";
 
 
 const GlobalStyle = createGlobalStyle`

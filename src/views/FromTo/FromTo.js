@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react'
 
-import { ReactComponent as Logo } from '../resources/logo.svg'
+import { ReactComponent as Logo } from '../../resources/logo.svg'
 import { Wrapper, First, Second, Info } from './style.js'
-import NextButton from '../StyledComponents/NextButton';
-import StyledCalendar from '../StyledComponents/StyledCalendar';
+import NextButton from '../../StyledComponents/NextButton';
+import StyledCalendar from '../../StyledComponents/StyledCalendar';
 
 
 const FromTo = () => {
@@ -14,6 +14,13 @@ const FromTo = () => {
     const [formFilled, setFormFilled] = useState(false)
     const [step, setStep] = useState(1)
     const [dateRange, setDateRange] = useState();
+    const [airportList, setAirportList] = useState()
+
+    useEffect(() => {
+        const getAirportList = async () => {
+            fetch('')
+        }
+    }, [])
 
     useEffect(() => {
         if (dept && dest && passengerNum > 0) {
