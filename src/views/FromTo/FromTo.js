@@ -1,4 +1,5 @@
-import { useEffect, useState, useRef } from 'react'
+import { useEffect, useRef, useState, useContext } from 'react'
+import { Context } from '../../Context';
 
 import { ReactComponent as Logo } from '../../resources/logo.svg'
 import { Wrapper, First, Second, Info } from './style.js'
@@ -24,14 +25,20 @@ function useOutsideAlerter(ref, onOutsideClick) {
 }
 
 const FromTo = () => {
-
-    const [dept, setDept] = useState('')
-    const [dest, setDest] = useState('')
+    const {
+        inputTrip,
+        setInputTrip,
+        trip,
+        setTrip,
+        passengerNum,
+        setPassengerNum,
+        step,
+        setStep,
+        dateRange,
+        setDateRange
+    } = useContext(Context)
     const [showDeptList, setShowDeptList] = useState('')
     const [showDestList, setShowDestList] = useState('')
-    const [passengerNum, setPassengerNum] = useState('1')
-    const [step, setStep] = useState(1)
-    const [dateRange, setDateRange] = useState();
 
     const deptRef = useRef()
     const destRef = useRef()
@@ -55,11 +62,12 @@ const FromTo = () => {
         })
     }
 
-    const renderAirports = (str, dataState, styleState) => {
-        return filterAirports(str).map(item => {
-            return str.length < 3 ? null : (
+    const renderAirports = (input, key, styleState) => {
+        return filterAirports(input).map(item => {
+            return input.length < 3 ? null : (
                 <option key={item.iata_code} value={item.name} onClick={() => {
-                    dataState(`${item.name}, ${sweAirports[airports.indexOf(item)].city} - ${item.iata_code}`)
+                    setInputTrip({ ...inputTrip, [key]: `${item.name}, ${sweAirports[airports.indexOf(item)].city} - ${item.iata_code}` })
+                    setTrip({ ...trip, [key]: `${item.name}, ${sweAirports[airports.indexOf(item)].city} - ${item.iata_code}` })
                     styleState(false)
                 }}>{item.name}, {sweAirports[airports.indexOf(item)].city} - {item.iata_code}</option>
             )
@@ -80,12 +88,15 @@ const FromTo = () => {
                         <input
                             type="text"
                             placeholder="Från?"
-                            value={dept}
+                            value={inputTrip.dept}
                             onClick={() => setShowDeptList(true)}
-                            onInput={e => setDept(e.target.value)} />
+                            onInput={e => {
+                                setInputTrip({ ...inputTrip, dept: e.target.value })
+                                setTrip({ ...trip, dept: '' })
+                            }} />
                         <datalist className={showDeptList ? 'show-list' : null}>
                             <div>
-                                {renderAirports(dept, setDept, setShowDeptList)}
+                                {renderAirports(inputTrip.dept, 'dept', setShowDeptList)}
                             </div>
                         </datalist>
                     </div>
@@ -93,12 +104,15 @@ const FromTo = () => {
                         <input
                             type="text"
                             placeholder="Till?"
-                            value={dest}
+                            value={inputTrip.dest}
                             onClick={() => setShowDestList(true)}
-                            onInput={e => setDest(e.target.value)} />
+                            onInput={e => {
+                                setInputTrip({ ...inputTrip, dest: e.target.value })
+                                setTrip({ ...trip, dest: '' })
+                            }} />
                         <datalist className={showDestList ? 'show-list' : null}>
                             <div>
-                                {renderAirports(dest, setDest, setShowDestList)}
+                                {renderAirports(inputTrip.dest, 'dest', setShowDestList)}
                             </div>
                         </datalist>
                     </div>
@@ -107,7 +121,7 @@ const FromTo = () => {
                         <br />
                         <input name="passengers" id="passengers" value={passengerNum} onFocus={e => e.target.select()} onInput={e => { /^([0-9]*)$/.test(e.target.value) ? setPassengerNum(e.target.value) : setPassengerNum(passengerNum) }} />
                     </label>
-                    <NextButton type="submit" disabled={!dept || !dest || !passengerNum}>Nästa</NextButton>
+                    <NextButton type="submit" disabled={!trip.dept || !trip.dest || !passengerNum}>Nästa</NextButton>
                 </form>
             </First>
             <Second>

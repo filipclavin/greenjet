@@ -36,12 +36,42 @@ export const First = styled.section`
         flex-direction: column;
         margin: 0 auto;
         
-        input, label {
+        .autocomplete, label {
             margin: 7.5px 0;
         }
 
-        .autocomplete input {
-            width: 100%;
+        .autocomplete {
+            input {
+                box-sizing: border-box;
+                width: 100%;
+            }
+            
+            datalist {
+                box-sizing: border-box;
+                position: relative;
+                height: 0;
+                margin: 0;
+                
+                div {
+                    overflow-y: auto;
+                    max-height: 256px;
+                }
+                
+                option {
+                    padding: 10px;
+                    background-color: whitesmoke;
+                    border-bottom: solid 1px #00000040;
+                    color: #595959;
+                    
+                    :hover {
+                        cursor: pointer;
+                    }
+                }
+            }
+
+            .show-list {
+                display: block;
+            }
         }
         
         input {
@@ -60,34 +90,6 @@ export const First = styled.section`
             } 
         }
         
-        datalist {
-            box-sizing: border-box;
-            position: relative;
-            top: -7.5px;
-            height: 0;
-            margin: 0;
-
-            div {
-                overflow-y: auto;
-                max-height: 300px;
-            }
-            
-            option {
-                padding: 10px;
-                background-color: whitesmoke;
-                border-bottom: solid 1px #00000040;
-                color: #595959;
-                
-                :hover {
-                    cursor: pointer;
-                }
-            }
-        }
-
-        .show-list {
-            display: block;
-        }
-
         #passengers {
             margin-top: 5px;
             padding: 5px 10px;
