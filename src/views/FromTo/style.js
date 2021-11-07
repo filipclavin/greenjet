@@ -39,6 +39,10 @@ export const First = styled.section`
         input, label {
             margin: 7.5px 0;
         }
+
+        .autocomplete input {
+            width: 100%;
+        }
         
         input {
             background-color: #128DA1;

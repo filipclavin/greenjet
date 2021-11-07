@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useRef } from 'react'
 
 import { ReactComponent as Logo } from '../../resources/logo.svg'
 import { Wrapper, First, Second, Info } from './style.js'
@@ -7,6 +7,21 @@ import StyledCalendar from '../../StyledComponents/StyledCalendar';
 
 const airports = require('../../airports.json')
 const sweAirports = require('../../airports-se.json')
+
+function useOutsideAlerter(ref, onOutsideClick) {
+    useEffect(() => {
+        // sets showDept/showDest to false on click outside
+        function handleClickOutside(event) {
+            if (ref.current && !ref.current.contains(event.target)) {
+                onOutsideClick(false)
+            }
+        }
+        document.addEventListener("mousedown", handleClickOutside);
+        return () => {
+            document.removeEventListener("mousedown", handleClickOutside);
+        };
+    }, [ref]);
+}
 
 const FromTo = () => {
 
@@ -17,6 +32,11 @@ const FromTo = () => {
     const [passengerNum, setPassengerNum] = useState('1')
     const [step, setStep] = useState(1)
     const [dateRange, setDateRange] = useState();
+
+    const deptRef = useRef()
+    const destRef = useRef()
+    useOutsideAlerter(deptRef, setShowDeptList)
+    useOutsideAlerter(destRef, setShowDestList)
 
     const filterAirports = (str) => {
         const query = str.toLocaleLowerCase()
@@ -56,28 +76,32 @@ const FromTo = () => {
             <First passengerNum={passengerNum} step={step}>
                 <Logo />
                 <form onSubmit={handleSubmit}>
-                    <input
-                        type="text"
-                        placeholder="Från?"
-                        value={dept}
-                        onClick={() => setShowDeptList(true)}
-                        onInput={e => setDept(e.target.value)} />
-                    <datalist className={showDeptList ? 'show-list' : null}>
-                        <div>
-                            {renderAirports(dept, setDept, setShowDeptList)}
-                        </div>
-                    </datalist>
-                    <input
-                        type="text"
-                        placeholder="Till?"
-                        value={dest}
-                        onClick={() => setShowDestList(true)}
-                        onInput={e => setDest(e.target.value)} />
-                    <datalist className={showDestList ? 'show-list' : null}>
-                        <div>
-                            {renderAirports(dest, setDest, setShowDestList)}
-                        </div>
-                    </datalist>
+                    <div className='autocomplete' ref={deptRef}>
+                        <input
+                            type="text"
+                            placeholder="Från?"
+                            value={dept}
+                            onClick={() => setShowDeptList(true)}
+                            onInput={e => setDept(e.target.value)} />
+                        <datalist className={showDeptList ? 'show-list' : null}>
+                            <div>
+                                {renderAirports(dept, setDept, setShowDeptList)}
+                            </div>
+                        </datalist>
+                    </div>
+                    <div className='autocomplete' ref={destRef}>
+                        <input
+                            type="text"
+                            placeholder="Till?"
+                            value={dest}
+                            onClick={() => setShowDestList(true)}
+                            onInput={e => setDest(e.target.value)} />
+                        <datalist className={showDestList ? 'show-list' : null}>
+                            <div>
+                                {renderAirports(dest, setDest, setShowDestList)}
+                            </div>
+                        </datalist>
+                    </div>
                     <label htmlFor="passengers">
                         Antal Resenärer:
                         <br />
