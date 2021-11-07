@@ -5,10 +5,7 @@ export const Wrapper = styled.main`
     flex-direction: column;
     height: 100%;
     background-color: rgba(181, 228, 140, 0.3);
-    border-radius: 0 0 25px 25px;
-    box-shadow: 0px 3px 22px 1px rgba(0, 0, 0, 0.25);
-
-    `
+`
 
 export const First = styled.section`
     display: flex;
@@ -37,7 +34,7 @@ export const First = styled.section`
         margin: 0 auto;
         
         label {
-            margin: 7.5px 0;
+            margin-bottom: 7.5px;
         }
         
         #passengers {

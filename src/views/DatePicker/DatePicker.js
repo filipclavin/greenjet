@@ -1,5 +1,7 @@
 import { useContext } from 'react'
 import { Context } from '../../Context'
+import { useNavigate } from 'react-router-dom';
+
 import { Wrapper, StyledHeader, StyledMain } from './style'
 
 import ProgressBar from '../../components/ProgressBar';
@@ -8,6 +10,8 @@ import NextButton from '../../components/NextButton';
 import AutoComplete from '../../components/AutoComplete';
 
 const DatePicker = () => {
+
+    const navigate = useNavigate()
 
     const {
         dateRange,
@@ -33,7 +37,7 @@ const DatePicker = () => {
                     setTrip={setTrip} />
             </StyledHeader>
             <StyledMain>
-                <ProgressBar />
+                <ProgressBar step={2} />
                 <StyledCalendar
                     onChange={setDateRange}
                     value={dateRange}
@@ -49,7 +53,7 @@ const DatePicker = () => {
                                 date.getDay() === 0 ? "sunday" : null : null
                     }
                 />
-                <NextButton disabled={!dateRange}>Nästa</NextButton>
+                <NextButton className='next-button' onClick={() => navigate('/offers')} disabled={!dateRange}>Nästa</NextButton>
             </StyledMain>
         </Wrapper>
     )

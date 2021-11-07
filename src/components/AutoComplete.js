@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from 'react'
 import styled from 'styled-components';
 
 const Wrapper = styled.div`
-    margin: 7.5px 0;
+    margin-bottom: 14px;
 
     input {
         box-sizing: border-box;
@@ -100,7 +100,14 @@ const AutoComplete = ({ name, inputTrip, setInputTrip, trip, setTrip }) => {
             return input.length < 3 ? null : (
                 <option key={item.iata_code} value={item.name} onClick={() => {
                     setInputTrip({ ...inputTrip, [key]: `${item.name}, ${sweAirports[airports.indexOf(item)].city} - ${item.iata_code}` })
-                    setTrip({ ...trip, [key]: `${item.name}, ${sweAirports[airports.indexOf(item)].city} - ${item.iata_code}` })
+                    setTrip({
+                        ...trip,
+                        [key]: {
+                            name: item.name,
+                            city: sweAirports[airports.indexOf(item)].city,
+                            iata: item.iata_code
+                        }
+                    })
                     styleState(false)
                 }}>{item.name}, {sweAirports[airports.indexOf(item)].city} - {item.iata_code}</option>
             )
@@ -116,7 +123,13 @@ const AutoComplete = ({ name, inputTrip, setInputTrip, trip, setTrip }) => {
                 onClick={() => setShowDeptList(true)}
                 onInput={e => {
                     setInputTrip({ ...inputTrip, dept: e.target.value })
-                    setTrip({ ...trip, dept: '' })
+                    setTrip({
+                        ...trip, dept: {
+                            name: '',
+                            city: '',
+                            iata: ''
+                        }
+                    })
                 }} />
             <datalist className={showDeptList ? 'show-list' : null}>
                 <div>
@@ -128,12 +141,18 @@ const AutoComplete = ({ name, inputTrip, setInputTrip, trip, setTrip }) => {
         <Wrapper ref={destRef}>
             <input
                 type="text"
-                placeholder="Från?"
+                placeholder="Till?"
                 value={inputTrip.dest}
                 onClick={() => setShowDestList(true)}
                 onInput={e => {
                     setInputTrip({ ...inputTrip, dest: e.target.value })
-                    setTrip({ ...trip, dest: '' })
+                    setTrip({
+                        ...trip, dest: {
+                            name: '',
+                            city: '',
+                            iata: ''
+                        }
+                    })
                 }} />
             <datalist className={showDestList ? 'show-list' : null}>
                 <div>

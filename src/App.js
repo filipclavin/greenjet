@@ -10,6 +10,7 @@ import { Context } from './Context';
 
 import FromTo from "./views/FromTo/FromTo";
 import DatePicker from "./views/DatePicker/DatePicker"
+import FlightOffers from './views/FlightOffers/FlightOffers';
 
 const GlobalStyle = createGlobalStyle`
   ${reset}
@@ -24,6 +25,22 @@ const GlobalStyle = createGlobalStyle`
     height: 100%;
     font-size: 18px;
   }
+
+  a {
+    text-decoration: none;
+
+    :hover {
+      cursor: pointer;
+    }
+  }
+
+  .back-link {
+    position: relative;
+    right: 25px;
+    width: 0;
+    color: #FFFFFF80;
+  }
+
   `
 
 const App = () => {
@@ -33,16 +50,25 @@ const App = () => {
     dest: ''
   })
   const [trip, setTrip] = useState({
-    dept: '',
-    dest: ''
+    dept: {
+      name: '',
+      city: '',
+      iata: ''
+    },
+    dest: {
+      name: '',
+      city: '',
+      iata: ''
+    }
   })
   const [passengerNum, setPassengerNum] = useState('1')
-  const [dateRange, setDateRange] = useState();
-
+  const [dateRange, setDateRange] = useState()
+  const [startDate, setStartDate] = useState()
+  const [endDate, setEndDate] = useState()
+  const [accessToken, setAccessToken] = useState()
 
   const { REACT_APP_CLIENT_ID, REACT_APP_CLIENT_SECRET } = process.env
 
-  const [accessToken, setAccessToken] = useState('ljkdmG2VWDybf0yqp1Juzv5cik9L')
 
   const getAccessToken = () => {
     fetch("https://test.api.amadeus.com/v1/security/oauth2/token", {
@@ -59,10 +85,36 @@ const App = () => {
       })
   }
 
+  function formatDate(date) {
+    var d = new Date(date),
+      month = '' + (d.getMonth() + 1),
+      day = '' + d.getDate(),
+      year = d.getFullYear();
+
+    if (month.length < 2)
+      month = '0' + month;
+    if (day.length < 2)
+      day = '0' + day;
+
+    return [year, month, day].join('-');
+  }
+
   useEffect(() => {
     console.log('clientID: ' + REACT_APP_CLIENT_ID, '\nclientSecret: ' + REACT_APP_CLIENT_SECRET)
-    /* getAccessToken() */
+    getAccessToken()
   }, [REACT_APP_CLIENT_ID, REACT_APP_CLIENT_SECRET])
+
+  useEffect(() => {
+    if (dateRange) {
+      setStartDate(formatDate(dateRange[0]))
+      setEndDate(formatDate(dateRange[1]));
+    }
+  }, [dateRange])
+
+  useEffect(() => {
+    console.log(startDate);
+    console.log(endDate);
+  }, [startDate, endDate])
 
   return (
     <>
@@ -77,12 +129,16 @@ const App = () => {
         setPassengerNum,
         dateRange,
         setDateRange,
+        accessToken,
+        startDate,
+        endDate,
         accessToken
       }}>
         <Router>
           <Routes>
             <Route exact path='/' element={<FromTo />} />
             <Route path='/pickdate' element={<DatePicker />} />
+            <Route path='/offers' element={<FlightOffers />} />
           </Routes>
         </Router>
       </Context.Provider>
