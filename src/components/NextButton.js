@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 
 const NextButton = styled.button`
+    display: block;
     background-color: #B5E48C;
     width: fit-content;
     padding: 15px 75px;
@@ -8,7 +9,6 @@ const NextButton = styled.button`
     border-radius: 25px;
     color: black;
     cursor: pointer;
-    align-self: center;
 
     :disabled {
         color: rgba(0, 0, 0, 0.25);

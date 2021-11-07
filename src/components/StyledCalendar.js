@@ -5,7 +5,6 @@ const StyledCalendar = styled(Calendar)`
     min-width: 272px;
     width: 45vw;
     max-width: 420px;
-    margin: 0 auto;
     font-size: 10px;
     line-height: 16px;
     box-sizing: content-box;

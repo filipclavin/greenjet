@@ -1,11 +1,11 @@
 import styled from 'styled-components'
 
-export const Wrapper = styled.div`
+export const Wrapper = styled.main`
     display: flex;
     flex-direction: column;
-    height: ${props => props.step === 2 ? '88%' : '100%'};
+    height: 100%;
     background-color: rgba(181, 228, 140, 0.3);
-    border-radius: ${props => props.step === 2 ? '0 0 25px 25px' : '0'};
+    border-radius: 0 0 25px 25px;
     box-shadow: 0px 3px 22px 1px rgba(0, 0, 0, 0.25);
 
     `
@@ -14,7 +14,7 @@ export const First = styled.section`
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
-    height: ${props => props.step === 1 ? '70%' : '150px'};
+    height: 70%;
     background-color: #39B7D4;
     border-radius: 0 0 30px 30px;
     box-shadow: 0px 3px 22px 1px rgba(0, 0, 0, 0.25);
@@ -27,7 +27,7 @@ export const First = styled.section`
         height: 40%;
         width: fit-content;
         margin: 0 auto;
-        display: ${props => props.step === 1 ? 'block' : 'none'};
+        display: block;
     }
     
     form {
@@ -36,74 +36,33 @@ export const First = styled.section`
         flex-direction: column;
         margin: 0 auto;
         
-        .autocomplete, label {
+        label {
             margin: 7.5px 0;
-        }
-
-        .autocomplete {
-            input {
-                box-sizing: border-box;
-                width: 100%;
-            }
-            
-            datalist {
-                box-sizing: border-box;
-                position: relative;
-                height: 0;
-                margin: 0;
-                
-                div {
-                    overflow-y: auto;
-                    max-height: 256px;
-                }
-                
-                option {
-                    padding: 10px;
-                    background-color: whitesmoke;
-                    border-bottom: solid 1px #00000040;
-                    color: #595959;
-                    
-                    :hover {
-                        cursor: pointer;
-                    }
-                }
-            }
-
-            .show-list {
-                display: block;
-            }
-        }
-        
-        input {
-            background-color: #128DA1;
-            padding: 10px;
-            color: white;
-            font-size: 18px;
-            border: none;
-            
-            ::placeholder {
-                color: white;
-            }
-
-            :focus {
-                outline: none;
-            } 
         }
         
         #passengers {
+            background-color: #128DA1;
+            color: white;
+            font-size: 18px;
+            border: none;
+
+            :focus {
+                outline: none;
+            }
+
             margin-top: 5px;
             padding: 5px 10px;
-            width: ${props => props.passengerNum.length ? props.passengerNum.length * 10 + 2 + 'px' : 12 + 'px'};
+            width: ${props => props.passengerNum.length ? props.passengerNum.length * 10.1 + 1 + 'px' : 10 + 'px'};
 
             transition: all 0.075s;
         }
         
-        button {
-            margin: 15px auto 0 auto;
+        label {
+            display: block;
         }
-        
-        label, button {
-            display: ${props => props.step === 1 ? 'block' : 'none'};
+
+        button {
+            margin-top: 20px;
         }
     }
     `
@@ -114,10 +73,6 @@ export const Second = styled.section`
     justify-content: center;
     align-items: center;
     flex-grow: 1;
-
-    > button {
-        margin-top: 46px;
-    }
 `
 
 export const Info = styled.p`

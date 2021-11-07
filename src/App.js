@@ -1,9 +1,15 @@
 import { useState, useEffect } from 'react';
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route
+} from "react-router-dom";
 import { createGlobalStyle } from 'styled-components'
 import reset from 'styled-reset'
 import { Context } from './Context';
 
 import FromTo from "./views/FromTo/FromTo";
+import DatePicker from "./views/DatePicker/DatePicker"
 
 const GlobalStyle = createGlobalStyle`
   ${reset}
@@ -31,7 +37,6 @@ const App = () => {
     dest: ''
   })
   const [passengerNum, setPassengerNum] = useState('1')
-  const [step, setStep] = useState(1)
   const [dateRange, setDateRange] = useState();
 
 
@@ -70,12 +75,16 @@ const App = () => {
         setTrip,
         passengerNum,
         setPassengerNum,
-        step,
-        setStep,
         dateRange,
-        setDateRange
+        setDateRange,
+        accessToken
       }}>
-        <FromTo accessToken={accessToken} />
+        <Router>
+          <Routes>
+            <Route exact path='/' element={<FromTo />} />
+            <Route path='/pickdate' element={<DatePicker />} />
+          </Routes>
+        </Router>
       </Context.Provider>
     </>
   )
