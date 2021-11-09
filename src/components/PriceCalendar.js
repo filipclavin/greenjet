@@ -4,15 +4,24 @@ import styled from 'styled-components';
 import { Context } from '../Context';
 
 const Wrapper = styled.section`
+    margin-top: 25px;
+    height: 130px;
     display: flex;
     align-items: center;
-    flex-grow: 1;
 
     > * {
-        height: 170px;
+        height: 100%;
+        width: 150px;
         margin: 0 25px;
         display: flex;
         flex-direction: column;
+    }
+
+    .price-calendar-title {
+        font-size: 14px;
+        font-weight: bold;
+        color: #89DDC3;
+        text-align: center;
     }
 
     .bars, .dates {
@@ -27,6 +36,7 @@ const Wrapper = styled.section`
     }
 
     .date {
+        margin-top: 5px;
         font-size: 14px;
         font-weight: 600;
         width: 18px;
@@ -99,21 +109,22 @@ const PriceCalendar = () => {
 
     const { startDate, endDate } = useContext(Context)
 
-    const renderDates = (baseDate) => {
-        baseDate = Number(baseDate.slice(8, 10))
-        console.log(baseDate);
+    const renderDates = (dateString) => {
         const dates = []
+        const baseDate = new Date(dateString)
         for (let i = -2; i < 3; i++) {
-            dates.push(<p key={i + 3} className='date'>{baseDate + i}</p>)
+            let date = new Date(baseDate)
+            date.setDate(date.getDate() + i)
+            dates.push(<p className='date'>{date.getDate()}</p>)
         }
-        console.log(dates);
+
         return dates
     }
 
     return (
         <Wrapper className='price-calendar'>
             <div className='depart-compare'>
-                <p>Jämför utresedatum</p>
+                <p className='price-calendar-title'>Jämför utresedatum</p>
                 <div className='bars'>
                     <div className='bar bar1' />
                     <div className='bar bar2' />
@@ -122,11 +133,11 @@ const PriceCalendar = () => {
                     <div className='bar bar5' />
                 </div>
                 <div className='dates'>
-                    {renderDates(startDate)}
+                    {startDate && renderDates(startDate)}
                 </div>
             </div>
             <div className='return-compare'>
-                <p>Jämför utresedatum</p>
+                <p className='price-calendar-title'>Jämför returdatum</p>
                 <div className='bars'>
                     <div className='bar bar1' />
                     <div className='bar bar2' />
@@ -135,7 +146,7 @@ const PriceCalendar = () => {
                     <div className='bar bar5' />
                 </div>
                 <div className='dates'>
-                    {renderDates(endDate)}
+                    {endDate && renderDates(endDate)}
                 </div>
             </div>
         </Wrapper>

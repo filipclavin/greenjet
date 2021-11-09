@@ -8,6 +8,7 @@ const NextButton = styled.button`
     border: none;
     border-radius: 25px;
     color: black;
+    font-size: 18px;
     cursor: pointer;
 
     :disabled {

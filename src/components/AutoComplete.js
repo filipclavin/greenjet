@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react'
 import styled from 'styled-components';
+import filterAirports from '../utils/filterAirports';
 
 const Wrapper = styled.div`
     margin-bottom: 14px;
@@ -77,23 +78,6 @@ const AutoComplete = ({ name, inputTrip, setInputTrip, trip, setTrip }) => {
     const destRef = useRef()
     useOutsideAlerter(deptRef, setShowDeptList)
     useOutsideAlerter(destRef, setShowDestList)
-
-    const filterAirports = (str) => {
-        const query = str.toLocaleLowerCase()
-
-        return airports.filter(item => {
-            return (
-                item.city.toLocaleLowerCase().startsWith(query) ||
-                item.country.toLocaleLowerCase().startsWith(query) ||
-                item.name.toLocaleLowerCase().startsWith(query) ||
-                item.iata_code.toLocaleLowerCase().startsWith(query) ||
-
-                sweAirports[airports.indexOf(item)].city.toLocaleLowerCase().startsWith(query) ||
-                sweAirports[airports.indexOf(item)].country.toLocaleLowerCase().startsWith(query) ||
-                item.name.toLocaleLowerCase().startsWith(query)
-            )
-        })
-    }
 
     const renderAirports = (input, key, styleState) => {
         return filterAirports(input).map(item => {

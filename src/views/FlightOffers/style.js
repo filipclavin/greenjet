@@ -6,23 +6,6 @@ export const Wrapper = styled.div`
 
 `
 
-export const StyledHeader = styled.header`
-    height: 10%;
-    border-radius: 0 0 25px 25px;
-    box-shadow: 0px 3px 22px 1px rgba(0, 0, 0, 0.25);
-    background-color: #39B7D4;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 30px;
-    font-weight: 600;
-
-    h1 {
-        color: #128DA1;
-    }
-
-`
-
 export const StyledMain = styled.main`
     height: 90vh;
     display: flex;
@@ -31,10 +14,12 @@ export const StyledMain = styled.main`
     align-items: center;
 
     .offer-list {
-        max-height: 468px;
+        height: 60vh;
         overflow-y: auto;
 
         .offer {
+            position: relative;
+            display: flex;
             box-sizing: border-box;
             font-size: 12px;
             height: 103px;
@@ -48,30 +33,36 @@ export const StyledMain = styled.main`
             cursor: pointer;
             
             .info {
-                width: 270px;
-                display: flex;
-                justify-content: space-between;
+                align-self: center;
+
+                .outgoing, .returning {
+                    width: 250px;
+                    display: flex;
+                    justify-content: space-between;
+
+                }
 
                 .left-side {
 
                     .iatas {
-                        margin-top: 2.5px;
                         color: #128DA1;
                     }
                 }
                 
+                hr {
+                    width: 270px;
+                    float: left;
+                }
             }
-
-            hr {
-                width: 270px;
-                float: left;
-            }
+            
 
             .price {
+                position: absolute;
+                bottom: 10px;
+                right: 10px;
                 color: #39B7D4;
                 font-size: 22px;
                 font-weight: bold;
-                float: right;
             }
         }
     }

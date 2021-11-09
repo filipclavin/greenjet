@@ -11,6 +11,7 @@ import { Context } from './Context';
 import FromTo from "./views/FromTo/FromTo";
 import DatePicker from "./views/DatePicker/DatePicker"
 import FlightOffers from './views/FlightOffers/FlightOffers';
+import FlightDetails from './views/FlightDetails/FlightDetails';
 
 const GlobalStyle = createGlobalStyle`
   ${reset}
@@ -65,6 +66,7 @@ const App = () => {
   const [dateRange, setDateRange] = useState()
   const [startDate, setStartDate] = useState()
   const [endDate, setEndDate] = useState()
+  const [flightDetails, setFlightDetails] = useState()
   const [accessToken, setAccessToken] = useState()
 
   const { REACT_APP_CLIENT_ID, REACT_APP_CLIENT_SECRET } = process.env
@@ -132,6 +134,8 @@ const App = () => {
         accessToken,
         startDate,
         endDate,
+        flightDetails,
+        setFlightDetails,
         accessToken
       }}>
         <Router>
@@ -139,6 +143,7 @@ const App = () => {
             <Route exact path='/' element={<FromTo />} />
             <Route path='/pickdate' element={<DatePicker />} />
             <Route path='/offers' element={<FlightOffers />} />
+            <Route path='/details' element={<FlightDetails />} />
           </Routes>
         </Router>
       </Context.Provider>

@@ -1,15 +1,24 @@
-import React, { useEffect, useState } from 'react'
-import { useContext } from 'react/cjs/react.development'
+import React, { useEffect, useState, useContext } from 'react'
+import { useNavigate } from 'react-router-dom'
+
 import { Context } from '../Context'
+import { ReactComponent as Loading } from '../resources/loading.svg'
 
 const OfferList = () => {
 
     const [flights, setFlights] = useState()
     const [simpleFlights, setSimpleFlights] = useState()
-    const [airlinesOut, setAirlinesOut] = useState()
-    const [airlinesBack, setAirlinesBack] = useState()
 
-    const { trip, startDate, endDate, passengerNum, accessToken } = useContext(Context)
+    const {
+        trip,
+        startDate,
+        endDate,
+        passengerNum,
+        accessToken,
+        setFlightDetails
+    } = useContext(Context)
+
+    const navigate = useNavigate()
 
     const formatTime = (time) => {
         return time.slice(11, 16)
@@ -60,12 +69,18 @@ const OfferList = () => {
                         }),
                         stopsOut: item.itineraries[0].segments.map(segment => {
                             if (segment.arrival.iataCode !== trip.dest.iata) {
-                                return segment.arrival.iataCode
+                                return {
+                                    ...segment.arrival,
+                                    at: formatTime(segment.arrival.at)
+                                }
                             }
                         }).filter(stop => stop),
                         stopsBack: item.itineraries[1].segments.map(segment => {
                             if (segment.arrival.iataCode !== trip.dept.iata) {
-                                return segment.arrival.iataCode
+                                return {
+                                    ...segment.arrival,
+                                    at: formatTime(segment.arrival.at)
+                                }
                             }
                         }).filter(stop => stop),
                         depTimeOut: formatTime(item.itineraries[0].segments[0].departure.at),
@@ -89,37 +104,50 @@ const OfferList = () => {
 
     return (
         <div className='offer-list'>
-            {simpleFlights && simpleFlights.map(item => {
+            {simpleFlights ? simpleFlights.map(item => {
 
                 return (
-                    <div key={item.id} className='offer'>
-                        <div className='outgoing'>
-                            <div className='info'>
+                    <div key={item.id} className='offer' onClick={() => {
+                        setFlightDetails({
+                            airlines: getAirlines([...item.airlinesOut, ...item.airlinesBack]),
+                            depTimeOut: item.depTimeOut,
+                            arrTimeOut: item.arrTimeOut,
+                            depTimeBack: item.depTimeBack,
+                            arrTimeBack: item.arrTimeBack,
+                            stopsOut: item.stopsOut,
+                            stopsBack: item.stopsBack
+                        })
+                        navigate('/details')
+                    }}>
+                        {/* limited by API, so could not get insert airlines for each result */}
+                        <div className='info'>
+                            <div className='outgoing'>
                                 <div className='left-side'>
-                                    <p className='iatas'>{trip.dept.iata} -{item.stopsOut[0] && item.stopsOut.map(stop => ` ${stop} -`)} {trip.dest.iata}</p>
+                                    <p className='iatas'>{trip.dept.iata} -{item.stopsOut[0] && item.stopsOut.map(stop => ` ${stop.iataCode} -`)} {trip.dest.iata}</p>
                                 </div>
                                 <div className='right-side'>
                                     <p>{item.depTimeOut} - {item.arrTimeOut} ({item.flightTimeOut})</p>
-                                    <p>{item.stopsOut ? `${item.stopsOut.length} stopp (${item.stopsOut.map(stop => stop)})` : 'Inga stopp'}</p>
+                                    <p>{item.stopsOut ? `${item.stopsOut.length} stopp (${item.stopsOut.map(stop => stop.iataCode).join(', ')})` : 'Inga stopp'}</p>
                                 </div>
                             </div>
-                        </div>
-                        <hr />
-                        <div className='returning'>
-                            <div className='info'>
+                            <hr />
+                            <div className='returning'>
                                 <div className='left-side'>
-                                    <p className='iatas'>{trip.dest.iata} -{item.stopsBack[0] && item.stopsBack.map(stop => ` ${stop} -`)} {trip.dept.iata}</p>
+                                    <p className='iatas'>{trip.dest.iata} -{item.stopsBack[0] && item.stopsBack.map(stop => ` ${stop.iataCode} -`)} {trip.dept.iata}</p>
                                 </div>
                                 <div className='right-side'>
                                     <p>{item.depTimeBack} - {item.arrTimeBack} ({item.flightTimeBack})</p>
-                                    <p>{item.stopsBack ? `${item.stopsBack.length} stopp (${item.stopsBack.map(stop => stop)})` : 'Inga stopp'}</p>
+                                    <p>{item.stopsBack[0] ? `${item.stopsBack.length} stopp (${item.stopsBack.map(stop => stop.iataCode).join(', ')})` : 'Inga stopp'}</p>
                                 </div>
                             </div>
                         </div>
                         <p className='price'>{item.price} :-</p>
                     </div>
                 )
-            })}
+            })
+                :
+                <Loading />
+            }
         </div>
     )
 }
