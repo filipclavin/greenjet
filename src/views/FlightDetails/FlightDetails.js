@@ -4,7 +4,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import { Context } from '../../Context'
 
 import { Wrapper, StyledMain } from './style'
-import { StyledHeader } from '../../components/StyledHeader'
+import Header from '../../components/StyledHeader'
 import ProgressBar from '../../components/ProgressBar'
 import NextButton from '../../components/NextButton'
 
@@ -39,10 +39,7 @@ const FlightDetails = () => {
     return (
         <Wrapper>
             {!flightDetails && navigate('/')}
-            <StyledHeader>
-                <Link className='back-link' to='/offers'>&lt;</Link>
-                <h1>{trip.dept.city} - {trip.dest.city}</h1>
-            </StyledHeader>
+            <Header />
             <StyledMain>
                 <ProgressBar step={4} />
                 <section className='flight-details'>
@@ -100,7 +97,9 @@ const FlightDetails = () => {
                         }
                     </div>
                 </section>
-                <NextButton className='next-button'>Nästa</NextButton>
+                <NextButton className='next-button' onClick={() => {
+                    navigate('/profile')
+                }}>Nästa</NextButton>
             </StyledMain>
         </Wrapper >
     )

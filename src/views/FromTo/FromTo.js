@@ -4,8 +4,8 @@ import { Context } from '../../Context';
 
 import { ReactComponent as Logo } from '../../resources/logo.svg'
 import { Wrapper, First, Second, Info } from './style.js'
+import NextButton from '../../components/NextButton';
 
-import NextButton from '../../StyledComponents/NextButton';
 import AutoComplete from '../../components/AutoComplete';
 
 const FromTo = () => {
@@ -43,9 +43,9 @@ const FromTo = () => {
                     <label htmlFor="passengers">
                         Antal Resenärer:
                         <br />
-                        <input name="passengers" id="passengers" value={passengerNum} onFocus={e => e.target.select()} onInput={e => { /^([0-9]*)$/.test(e.target.value) ? setPassengerNum(e.target.value) : setPassengerNum(passengerNum) }} />
+                        <input name="passengers" id="passengers" value={passengerNum ? passengerNum.toString() : ''} onFocus={e => e.target.select()} onInput={e => { /^([0-9]*)$/.test(e.target.value) && setPassengerNum(parseInt(e.target.value)) }} />
                     </label>
-                    <NextButton type="submit" disabled={!trip.dept || !trip.dest || !passengerNum}>Nästa</NextButton>
+                    <NextButton type="submit" disabled={!trip.dept.city || !trip.dest.city || !passengerNum}>Nästa</NextButton>
                 </form>
             </First>
             <Second>

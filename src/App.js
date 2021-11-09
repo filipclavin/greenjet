@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import {
   BrowserRouter as Router,
   Routes,
-  Route
+  Route,
 } from "react-router-dom";
 import { createGlobalStyle } from 'styled-components'
 import reset from 'styled-reset'
@@ -12,6 +12,8 @@ import FromTo from "./views/FromTo/FromTo";
 import DatePicker from "./views/DatePicker/DatePicker"
 import FlightOffers from './views/FlightOffers/FlightOffers';
 import FlightDetails from './views/FlightDetails/FlightDetails';
+import TravelProfile from './views/TravelProfile/TravelProfile';
+import Seats from './views/Seats/Seats';
 
 const GlobalStyle = createGlobalStyle`
   ${reset}
@@ -62,15 +64,15 @@ const App = () => {
       iata: ''
     }
   })
-  const [passengerNum, setPassengerNum] = useState('1')
+  const [passengerNum, setPassengerNum] = useState(1)
   const [dateRange, setDateRange] = useState()
   const [startDate, setStartDate] = useState()
   const [endDate, setEndDate] = useState()
   const [flightDetails, setFlightDetails] = useState()
+  const [passengers, setPassengers] = useState([])
   const [accessToken, setAccessToken] = useState()
 
   const { REACT_APP_CLIENT_ID, REACT_APP_CLIENT_SECRET } = process.env
-
 
   const getAccessToken = () => {
     fetch("https://test.api.amadeus.com/v1/security/oauth2/token", {
@@ -114,9 +116,8 @@ const App = () => {
   }, [dateRange])
 
   useEffect(() => {
-    console.log(startDate);
-    console.log(endDate);
-  }, [startDate, endDate])
+    console.log(passengers);
+  }, [passengers])
 
   return (
     <>
@@ -136,6 +137,8 @@ const App = () => {
         endDate,
         flightDetails,
         setFlightDetails,
+        passengers,
+        setPassengers,
         accessToken
       }}>
         <Router>
@@ -144,6 +147,8 @@ const App = () => {
             <Route path='/pickdate' element={<DatePicker />} />
             <Route path='/offers' element={<FlightOffers />} />
             <Route path='/details' element={<FlightDetails />} />
+            <Route path='/profile' element={<TravelProfile />} />
+            <Route path='/seats' element={<Seats />} />
           </Routes>
         </Router>
       </Context.Provider>

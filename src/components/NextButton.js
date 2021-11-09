@@ -1,10 +1,12 @@
 import styled from 'styled-components';
 
 const NextButton = styled.button`
-    display: block;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     background-color: #B5E48C;
-    width: fit-content;
-    padding: 15px 75px;
+    height: 41px;
+    width: 149px;
     border: none;
     border-radius: 25px;
     color: black;

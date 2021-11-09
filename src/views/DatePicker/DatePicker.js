@@ -53,7 +53,7 @@ const DatePicker = () => {
                                 date.getDay() === 0 ? "sunday" : null : null
                     }
                 />
-                <NextButton className='next-button' onClick={() => navigate('/offers')} disabled={!dateRange}>Nästa</NextButton>
+                <NextButton className='next-button' onClick={() => navigate('/offers')} disabled={!dateRange || !trip.dept.city || !trip.dest.city}>Nästa</NextButton>
             </StyledMain>
         </Wrapper>
     )

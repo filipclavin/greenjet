@@ -127,7 +127,7 @@ const OfferList = () => {
                                 </div>
                                 <div className='right-side'>
                                     <p>{item.depTimeOut} - {item.arrTimeOut} ({item.flightTimeOut})</p>
-                                    <p>{item.stopsOut ? `${item.stopsOut.length} stopp (${item.stopsOut.map(stop => stop.iataCode).join(', ')})` : 'Inga stopp'}</p>
+                                    <p>{item.stopsOut[0] ? `${item.stopsOut.length} stopp (${item.stopsOut.map(stop => stop.iataCode).join(', ')})` : 'Inga stopp'}</p>
                                 </div>
                             </div>
                             <hr />

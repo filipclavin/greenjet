@@ -1,4 +1,9 @@
+import { useContext } from 'react';
+import { Context } from '../Context';
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
+
+
 
 export const StyledHeader = styled.header`
     height: 10%;
@@ -16,3 +21,17 @@ export const StyledHeader = styled.header`
     }
 
 `
+
+const Header = () => {
+
+    const { trip } = useContext(Context)
+
+    return (
+        <StyledHeader>
+            <Link className='back-link' to='/offers'>&lt;</Link>
+            <h1>{trip.dept.city} - {trip.dest.city}</h1>
+        </StyledHeader>
+    )
+}
+
+export default Header

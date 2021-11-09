@@ -104,6 +104,7 @@ const AutoComplete = ({ name, inputTrip, setInputTrip, trip, setTrip }) => {
                 type="text"
                 placeholder="Från?"
                 value={inputTrip.dept}
+                onFocus={e => e.target.select()}
                 onClick={() => setShowDeptList(true)}
                 onInput={e => {
                     setInputTrip({ ...inputTrip, dept: e.target.value })
@@ -127,6 +128,7 @@ const AutoComplete = ({ name, inputTrip, setInputTrip, trip, setTrip }) => {
                 type="text"
                 placeholder="Till?"
                 value={inputTrip.dest}
+                onFocus={e => e.target.select()}
                 onClick={() => setShowDestList(true)}
                 onInput={e => {
                     setInputTrip({ ...inputTrip, dest: e.target.value })

@@ -49,7 +49,7 @@ export const First = styled.section`
 
             margin-top: 5px;
             padding: 5px 10px;
-            width: ${props => props.passengerNum.length ? props.passengerNum.length * 10.1 + 1 + 'px' : 10 + 'px'};
+            width: ${props => props.passengerNum && props.passengerNum.toString().length ? props.passengerNum.toString().length * 10.1 + 1 + 'px' : 10 + 'px'};
 
             transition: all 0.075s;
         }
@@ -59,6 +59,7 @@ export const First = styled.section`
         }
 
         button {
+            align-self: center;
             margin-top: 20px;
         }
     }

@@ -1,9 +1,9 @@
 import React, { useContext, useEffect } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { Context } from '../../Context'
 
 import { StyledMain, Wrapper } from './style'
-import { StyledHeader } from '../../components/StyledHeader'
+import Header from '../../components/StyledHeader'
 import ProgressBar from '../../components/ProgressBar'
 import OfferList from '../../components/OfferList'
 import PriceCalendar from '../../components/PriceCalendar'
@@ -21,10 +21,7 @@ const FlightOffers = () => {
 
     return (
         <Wrapper>
-            <StyledHeader>
-                <Link className='back-link' to='/pickdate'>&lt;</Link>
-                <h1>{trip.dept.city} - {trip.dest.city}</h1>
-            </StyledHeader>
+            <Header />
             <StyledMain>
                 <ProgressBar step={3} />
                 <PriceCalendar />
