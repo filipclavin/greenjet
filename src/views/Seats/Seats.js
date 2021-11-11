@@ -8,6 +8,7 @@ import { Context } from '../../Context'
 import { StyledMain, Wrapper } from './style'
 import Header from '../../components/StyledHeader'
 import NextButton from '../../components/NextButton'
+import ProgressBar from '../../components/ProgressBar'
 
 const Seats = () => {
 
@@ -25,7 +26,6 @@ const Seats = () => {
 
         for (let i = 0; i < 5; i++) {
             rand = seedrandom(seed + i.toString())()
-            console.log(`Business:\nRow: ${rowNum}\nSeat: ${businessSeatLetters[i]}\nSeed: ${seed}\nRand: ${rand}`);
 
             businessRow.push(
                 i !== 2 &&
@@ -43,6 +43,24 @@ const Seats = () => {
                         container.style.cursor = "default";
                     }}
                     onClick={() => {
+                        if (seats.length < passengers.length) {
+                            setSeats([...seats, {
+                                firstName: passengers[seats.length].firstName,
+                                lastName: passengers[seats.length].lastName,
+                                rowNum,
+                                seatLetter: businessSeatLetters[i]
+                            }])
+                        } else {
+                            setSeats([...seats.filter(item => seats.indexOf(item) !== 0), {
+                                firstName: seats[0].firstName,
+                                lastName: seats[0].lastName,
+                                rowNum,
+                                seatLetter: businessSeatLetters[i]
+                            }])
+                        }
+
+                    }}
+                    onTap={() => {
                         if (seats.length < passengers.length) {
                             setSeats([...seats, {
                                 firstName: passengers[seats.length].firstName,
@@ -123,7 +141,6 @@ const Seats = () => {
 
         for (let i = 0; i < 7; i++) {
             rand = seedrandom(seed + i.toString())()
-            console.log(`Economy:\nRow: ${rowNum}\nSeat: ${economySeatLetters[i]}\nSeed: ${seed}\nRand: ${rand}`);
 
             economyRow.push(
                 i !== 3 &&
@@ -141,6 +158,24 @@ const Seats = () => {
                         container.style.cursor = "default";
                     }}
                     onClick={() => {
+                        if (seats.length < passengers.length) {
+                            setSeats([...seats, {
+                                firstName: passengers[seats.length].firstName,
+                                lastName: passengers[seats.length].lastName,
+                                rowNum,
+                                seatLetter: economySeatLetters[i]
+                            }])
+                        } else {
+                            setSeats([...seats.filter(item => seats.indexOf(item) !== 0), {
+                                firstName: seats[0].firstName,
+                                lastName: seats[0].lastName,
+                                rowNum,
+                                seatLetter: economySeatLetters[i]
+                            }])
+                        }
+
+                    }}
+                    onTap={() => {
                         if (seats.length < passengers.length) {
                             setSeats([...seats, {
                                 firstName: passengers[seats.length].firstName,
@@ -389,6 +424,7 @@ const Seats = () => {
             {!passengers[0] && navigate('/')}
             <Header linkTo='/profile' />
             <StyledMain>
+                <ProgressBar step={6} white />
                 {/* Unable to get real seats due to time constraints */}
                 <Stage
                     width={963}

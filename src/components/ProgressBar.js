@@ -12,15 +12,15 @@ const Wrapper = styled.div`
         height: 100%;
         width: 15px;
         border-radius: 3px;
-        background-color: #39B7D440;
+        background-color: ${props => props.white ? '#FFFFFF40' : '#39B7D440'};
     }
 
     .current-step {
-        background-color: #39B7D4;
+        background-color: ${props => props.white ? '#FFFFFF' : '#39B7D4'};
     }
 `
 
-const ProgressBar = ({ step }) => {
+const ProgressBar = ({ step, white }) => {
 
     const divs = []
 
@@ -29,7 +29,7 @@ const ProgressBar = ({ step }) => {
     }
 
     return (
-        <Wrapper>
+        <Wrapper white={white} className='progress-bar'>
             {divs}
         </Wrapper>
     )

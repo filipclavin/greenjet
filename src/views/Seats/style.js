@@ -13,7 +13,7 @@ export const Wrapper = styled.div`
     `
 
 export const StyledMain = styled.main`
-position: relative;
+        position: relative;
         height: 100vh;
         display: flex;
         justify-content: center;
@@ -28,5 +28,12 @@ position: relative;
             position: absolute;
             bottom: 35px;
             left: calc(50% - 74.5px);
+        }
+
+        .progress-bar {
+            position: absolute;
+            top: 10vh;
+            left: calc(50% - 142.5px);
+            z-index: 1;
         }
 `
