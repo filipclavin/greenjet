@@ -77,7 +77,7 @@ const App = () => {
   const { REACT_APP_CLIENT_ID, REACT_APP_CLIENT_SECRET } = process.env
 
   useEffect(() => {
-    setRandom([Math.random() * 2, Math.random() * 2, Math.random() * 2, Math.random() * 2, Math.random() * 2, Math.random() * 2, Math.random() * 2])
+    setRandom([Math.random() * 2, Math.random() * 2, Math.random() * 2, Math.random() * 2, Math.random() * 2, Math.random() * 2, Math.random() * 2, Math.random() * 2, Math.random() * 2, Math.random() * 2])
   }, []);
 
   const getAccessToken = () => {
