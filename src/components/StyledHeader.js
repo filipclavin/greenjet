@@ -22,13 +22,13 @@ export const StyledHeader = styled.header`
 
 `
 
-const Header = () => {
+const Header = ({ linkTo }) => {
 
     const { trip } = useContext(Context)
 
     return (
         <StyledHeader>
-            <Link className='back-link' to='/offers'>&lt;</Link>
+            <Link className='back-link' to={linkTo}>&lt;</Link>
             <h1>{trip.dept.city} - {trip.dest.city}</h1>
         </StyledHeader>
     )

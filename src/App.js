@@ -70,9 +70,15 @@ const App = () => {
   const [endDate, setEndDate] = useState()
   const [flightDetails, setFlightDetails] = useState()
   const [passengers, setPassengers] = useState([])
+  const [seats, setSeats] = useState([])
+  const [random, setRandom] = useState()
   const [accessToken, setAccessToken] = useState()
 
   const { REACT_APP_CLIENT_ID, REACT_APP_CLIENT_SECRET } = process.env
+
+  useEffect(() => {
+    setRandom([Math.random() * 2, Math.random() * 2, Math.random() * 2, Math.random() * 2, Math.random() * 2, Math.random() * 2, Math.random() * 2])
+  }, []);
 
   const getAccessToken = () => {
     fetch("https://test.api.amadeus.com/v1/security/oauth2/token", {
@@ -139,6 +145,9 @@ const App = () => {
         setFlightDetails,
         passengers,
         setPassengers,
+        seats,
+        setSeats,
+        random,
         accessToken
       }}>
         <Router>

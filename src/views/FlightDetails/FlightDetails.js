@@ -39,7 +39,7 @@ const FlightDetails = () => {
     return (
         <Wrapper>
             {!flightDetails && navigate('/')}
-            <Header />
+            <Header linkTo='/offers' />
             <StyledMain>
                 <ProgressBar step={4} />
                 <section className='flight-details'>

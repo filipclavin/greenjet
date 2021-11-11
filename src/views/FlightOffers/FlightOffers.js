@@ -21,7 +21,7 @@ const FlightOffers = () => {
 
     return (
         <Wrapper>
-            <Header />
+            <Header linkTo='/pickdate' />
             <StyledMain>
                 <ProgressBar step={3} />
                 <PriceCalendar />

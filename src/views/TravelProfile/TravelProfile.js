@@ -24,16 +24,12 @@ const TravelProfile = () => {
 
     const { trip, passengerNum, passengers, setPassengers } = useContext(Context)
 
-    useEffect(() => {
-        console.log(formInputs);
-    }, [formInputs])
-
     const navigate = useNavigate()
 
     return (
         <Wrapper>
-            {/* {!trip.dept.city && navigate('/')} */}
-            <Header />
+            {!trip.dept.city && navigate('/')}
+            <Header linkTo='/details' />
             <StyledMain>
                 <ProgressBar step={5} />
                 <form>
@@ -54,11 +50,11 @@ const TravelProfile = () => {
                     </div>
                     <p className='footnote'>*Se till att all information stämmer överens med ditt pass.</p>
                 </form>
-                {passengers.length === passengerNum - 1 ?
+                {passengers.length >= passengerNum - 1 ?
                     <NextButton
-                        disabled={!(formInputs.firstName && formInputs.lastName && formInputs.birthDate && formInputs.email && formInputs.phone && formInputs.passport)}
+                        disabled={!(formInputs.firstName && formInputs.lastName && formInputs.birthDate && formInputs.email && formInputs.phone && formInputs.passport) && !(passengers.length >= passengerNum)}
                         onClick={() => {
-                            setPassengers([...passengers, formInputs])
+                            !(passengers.length >= passengerNum) && setPassengers([...passengers, formInputs])
                             navigate('/seats')
                         }}>Välj Sittplats</NextButton>
                     :
