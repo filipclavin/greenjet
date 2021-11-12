@@ -4,7 +4,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import { Context } from '../../Context'
 
 import { Wrapper, StyledMain } from './style'
-import Header from '../../components/StyledHeader'
+import Header from '../../components/Header'
 import ProgressBar from '../../components/ProgressBar'
 import NextButton from '../../components/NextButton'
 

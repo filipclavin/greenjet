@@ -6,6 +6,7 @@ export const Wrapper = styled.div`
 `
 
 export const StyledMain = styled.main`
+    position: relative;
     height: 90vh;
     display: flex;
     flex-direction: column;

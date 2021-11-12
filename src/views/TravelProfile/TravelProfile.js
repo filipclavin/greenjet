@@ -1,13 +1,12 @@
 import React, { useContext, useState } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { Context } from '../../Context'
 
-import Header, { StyledHeader } from '../../components/StyledHeader'
+import Header from '../../components/Header'
 import ProgressBar from '../../components/ProgressBar'
 
 import { StyledMain, Wrapper } from './style'
 import NextButton from '../../components/NextButton'
-import { useEffect } from 'react/cjs/react.development'
 
 const TravelProfile = () => {
 
@@ -55,7 +54,7 @@ const TravelProfile = () => {
                         disabled={!(formInputs.firstName && formInputs.lastName && formInputs.birthDate && formInputs.email && formInputs.phone && formInputs.passport) && !(passengers.length >= passengerNum)}
                         onClick={() => {
                             !(passengers.length >= passengerNum) && setPassengers([...passengers, formInputs])
-                            navigate('/seats')
+                            navigate('/seats-out')
                         }}>Välj Sittplats</NextButton>
                     :
                     <NextButton

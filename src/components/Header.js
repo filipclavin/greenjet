@@ -22,14 +22,19 @@ export const StyledHeader = styled.header`
 
 `
 
-const Header = ({ linkTo }) => {
+const Header = ({ linkTo, title }) => {
 
     const { trip } = useContext(Context)
 
     return (
         <StyledHeader>
             <Link className='back-link' to={linkTo}>&lt;</Link>
-            <h1>{trip.dept.city} - {trip.dest.city}</h1>
+            {
+                title ?
+                    <h1>{title}</h1>
+                    :
+                    <h1>{trip.dept.city} - {trip.dest.city}</h1>
+            }
         </StyledHeader>
     )
 }

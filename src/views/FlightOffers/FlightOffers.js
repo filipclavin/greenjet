@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import { Context } from '../../Context'
 
 import { StyledMain, Wrapper } from './style'
-import Header from '../../components/StyledHeader'
+import Header from '../../components/Header'
 import ProgressBar from '../../components/ProgressBar'
 import OfferList from '../../components/OfferList'
 import PriceCalendar from '../../components/PriceCalendar'

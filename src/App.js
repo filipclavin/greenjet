@@ -13,7 +13,9 @@ import DatePicker from "./views/DatePicker/DatePicker"
 import FlightOffers from './views/FlightOffers/FlightOffers';
 import FlightDetails from './views/FlightDetails/FlightDetails';
 import TravelProfile from './views/TravelProfile/TravelProfile';
-import Seats from './views/Seats/Seats';
+import SeatsOut from './views/Seats/SeatsOut';
+import Compensate from './views/CarbonOffsetting/CarbonOffsetting';
+import SeatsBack from './views/Seats/SeatsBack';
 
 const GlobalStyle = createGlobalStyle`
   ${reset}
@@ -70,8 +72,10 @@ const App = () => {
   const [endDate, setEndDate] = useState()
   const [flightDetails, setFlightDetails] = useState()
   const [passengers, setPassengers] = useState([])
-  const [seats, setSeats] = useState([])
+  const [seatsOut, setSeatsOut] = useState([])
+  const [seatsBack, setSeatsBack] = useState([])
   const [random, setRandom] = useState()
+  const [compensationMultiplier, setCompensationMultiplier] = useState(0.5)
   const [accessToken, setAccessToken] = useState()
 
   const { REACT_APP_CLIENT_ID, REACT_APP_CLIENT_SECRET } = process.env
@@ -130,24 +134,18 @@ const App = () => {
       <GlobalStyle />
 
       <Context.Provider value={{
-        inputTrip,
-        setInputTrip,
-        trip,
-        setTrip,
-        passengerNum,
-        setPassengerNum,
-        dateRange,
-        setDateRange,
-        accessToken,
+        inputTrip, setInputTrip,
+        trip, setTrip,
+        passengerNum, setPassengerNum,
+        dateRange, setDateRange,
         startDate,
         endDate,
-        flightDetails,
-        setFlightDetails,
-        passengers,
-        setPassengers,
-        seats,
-        setSeats,
+        flightDetails, setFlightDetails,
+        passengers, setPassengers,
+        seatsOut, setSeatsOut,
+        seatsBack, setSeatsBack,
         random,
+        compensationMultiplier, setCompensationMultiplier,
         accessToken
       }}>
         <Router>
@@ -157,7 +155,9 @@ const App = () => {
             <Route path='/offers' element={<FlightOffers />} />
             <Route path='/details' element={<FlightDetails />} />
             <Route path='/profile' element={<TravelProfile />} />
-            <Route path='/seats' element={<Seats />} />
+            <Route path='/seats-out' element={<SeatsOut />} />
+            <Route path='/seats-back' element={<SeatsBack />} />
+            <Route path='/carbon-offsetting' element={<Compensate />} />
           </Routes>
         </Router>
       </Context.Provider>

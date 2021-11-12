@@ -36,4 +36,31 @@ export const StyledMain = styled.main`
             left: calc(50% - 142.5px);
             z-index: 1;
         }
+
+        .seat-summary-wrapper {
+            position: absolute;
+            top: 19vh;
+            left: 5vw;
+            z-index: 1;
+
+            h4 {
+                font-size: 16px;
+                font-weight: 500;
+            }
+
+            .seat-summary {
+                background-color: #39B7D4;
+                border-radius: 15px;
+                padding: 10px;
+                margin-bottom: 20px;
+                line-height: 1.2em;
+                color: white;
+                min-width: 100px;
+                
+                h3 {
+                    font-weight: 700;
+                    margin-bottom: 5px;
+                }
+            }
+        }
 `
