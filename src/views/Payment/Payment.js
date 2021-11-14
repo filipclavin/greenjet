@@ -71,7 +71,10 @@ const Payment = () => {
                 </form>
                 <NextButton
                     disabled={!(formInputs.cardNumber && formInputs.cardDate && formInputs.cvc && formInputs.cardName && formInputs.adress && formInputs.city && formInputs.postalCode && formInputs.country)}
-                    onClick={setPayeeDetails(formInputs)}>{finalPrice} SEK</NextButton>
+                    onClick={() => {
+                        setPayeeDetails(formInputs)
+                        navigate('/receipt')
+                    }}>{finalPrice} SEK</NextButton>
             </StyledMain>
         </Wrapper>
     )

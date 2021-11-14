@@ -28,7 +28,7 @@ const Header = ({ linkTo, title }) => {
 
     return (
         <StyledHeader>
-            <Link className='back-link' to={linkTo}>&lt;</Link>
+            {linkTo && <Link className='back-link' to={linkTo}>&lt;</Link>}
             {
                 title ?
                     <h1>{title}</h1>
