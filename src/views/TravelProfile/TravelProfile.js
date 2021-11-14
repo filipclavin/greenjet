@@ -41,7 +41,7 @@ const TravelProfile = () => {
                     <div className='rest'>
                         <div className='date-of-birth'>
                             <input value={formInputs.birthDate} onInput={(e) => setFormInputs({ ...formInputs, birthDate: e.target.value })} type="text" placeholder='Födelsedatum*' required />
-                            <p>DD/MM/YY</p>
+                            <p>DD/MM/ÅÅ</p>
                         </div>
                         <input value={formInputs.email} onInput={(e) => setFormInputs({ ...formInputs, email: e.target.value })} type="email" placeholder='Email*' required />
                         <input value={formInputs.phone} onInput={(e) => setFormInputs({ ...formInputs, phone: e.target.value })} type="text" placeholder='Telefon*' required />

@@ -115,7 +115,8 @@ const OfferList = () => {
                             depTimeBack: item.depTimeBack,
                             arrTimeBack: item.arrTimeBack,
                             stopsOut: item.stopsOut,
-                            stopsBack: item.stopsBack
+                            stopsBack: item.stopsBack,
+                            price: parseInt(item.price)
                         })
                         navigate('/details')
                     }}>

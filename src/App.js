@@ -14,8 +14,10 @@ import FlightOffers from './views/FlightOffers/FlightOffers';
 import FlightDetails from './views/FlightDetails/FlightDetails';
 import TravelProfile from './views/TravelProfile/TravelProfile';
 import SeatsOut from './views/Seats/SeatsOut';
-import Compensate from './views/CarbonOffsetting/CarbonOffsetting';
 import SeatsBack from './views/Seats/SeatsBack';
+import Payment from './views/Payment/Payment';
+import Receipt from './views/Receipt/Receipt';
+import CarbonOffsetting from './views/CarbonOffsetting/CarbonOffsetting';
 
 const GlobalStyle = createGlobalStyle`
   ${reset}
@@ -76,6 +78,8 @@ const App = () => {
   const [seatsBack, setSeatsBack] = useState([])
   const [random, setRandom] = useState()
   const [compensationMultiplier, setCompensationMultiplier] = useState(0.5)
+  const [finalPrice, setFinalPrice] = useState()
+  const [payeeDetails, setPayeeDetails] = useState()
   const [accessToken, setAccessToken] = useState()
 
   const { REACT_APP_CLIENT_ID, REACT_APP_CLIENT_SECRET } = process.env
@@ -146,6 +150,8 @@ const App = () => {
         seatsBack, setSeatsBack,
         random,
         compensationMultiplier, setCompensationMultiplier,
+        finalPrice, setFinalPrice,
+        payeeDetails, setPayeeDetails,
         accessToken
       }}>
         <Router>
@@ -157,7 +163,9 @@ const App = () => {
             <Route path='/profile' element={<TravelProfile />} />
             <Route path='/seats-out' element={<SeatsOut />} />
             <Route path='/seats-back' element={<SeatsBack />} />
-            <Route path='/carbon-offsetting' element={<Compensate />} />
+            <Route path='/carbon-offsetting' element={<CarbonOffsetting />} />
+            <Route path='/payment' element={<Payment />} />
+            <Route path='/receipt' element={<Receipt />} />
           </Routes>
         </Router>
       </Context.Provider>
