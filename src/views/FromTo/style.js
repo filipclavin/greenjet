@@ -73,7 +73,7 @@ export const Second = styled.section`
     flex-grow: 1;
 `
 
-export const Info = styled.p`
+export const Info = styled.div`
     width: 385px;
     color: #595959;
     line-height: 1.2rem;

@@ -18,6 +18,7 @@ import SeatsBack from './views/Seats/SeatsBack';
 import Payment from './views/Payment/Payment';
 import Receipt from './views/Receipt/Receipt';
 import CarbonOffsetting from './views/CarbonOffsetting/CarbonOffsetting';
+import Itinerary from './views/Itinerary/Itinerary';
 
 const GlobalStyle = createGlobalStyle`
   ${reset}
@@ -120,6 +121,7 @@ const App = () => {
   useEffect(() => {
     console.log('clientID: ' + REACT_APP_CLIENT_ID, '\nclientSecret: ' + REACT_APP_CLIENT_SECRET)
     getAccessToken()
+    // eslint-disable-next-line
   }, [REACT_APP_CLIENT_ID, REACT_APP_CLIENT_SECRET])
 
   useEffect(() => {
@@ -166,6 +168,7 @@ const App = () => {
             <Route path='/carbon-offsetting' element={<CarbonOffsetting />} />
             <Route path='/payment' element={<Payment />} />
             <Route path='/receipt' element={<Receipt />} />
+            <Route path='/itinerary' element={<Itinerary />} />
           </Routes>
         </Router>
       </Context.Provider>

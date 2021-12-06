@@ -3,6 +3,7 @@ import { useContext } from 'react/cjs/react.development'
 import seedrandom from 'seedrandom'
 import { Context } from '../Context'
 
+/* eslint-disable */
 const SeatsRender = ({ seats, setSeats, random }) => {
 
     const { passengers } = useContext(Context)
@@ -32,40 +33,42 @@ const SeatsRender = ({ seats, setSeats, random }) => {
                         container.style.cursor = "default";
                     }}
                     onClick={() => {
-                        if (seats.length < passengers.length) {
-                            setSeats([...seats, {
-                                firstName: passengers[seats.length].firstName,
-                                lastName: passengers[seats.length].lastName,
-                                rowNum,
-                                seatLetter: businessSeatLetters[i]
-                            }])
-                        } else {
-                            setSeats([...seats.filter(item => seats.indexOf(item) !== 0), {
-                                firstName: seats[0].firstName,
-                                lastName: seats[0].lastName,
-                                rowNum,
-                                seatLetter: businessSeatLetters[i]
-                            }])
+                        if (setSeats) {
+                            if (seats.length < passengers.length) {
+                                setSeats([...seats, {
+                                    firstName: passengers[seats.length].firstName,
+                                    lastName: passengers[seats.length].lastName,
+                                    rowNum,
+                                    seatLetter: businessSeatLetters[i]
+                                }])
+                            } else {
+                                setSeats([...seats.filter(item => seats.indexOf(item) !== 0), {
+                                    firstName: seats[0].firstName,
+                                    lastName: seats[0].lastName,
+                                    rowNum,
+                                    seatLetter: businessSeatLetters[i]
+                                }])
+                            }
                         }
-
                     }}
                     onTap={() => {
-                        if (seats.length < passengers.length) {
-                            setSeats([...seats, {
-                                firstName: passengers[seats.length].firstName,
-                                lastName: passengers[seats.length].lastName,
-                                rowNum,
-                                seatLetter: businessSeatLetters[i]
-                            }])
-                        } else {
-                            setSeats([...seats.filter(item => seats.indexOf(item) !== 0), {
-                                firstName: seats[0].firstName,
-                                lastName: seats[0].lastName,
-                                rowNum,
-                                seatLetter: businessSeatLetters[i]
-                            }])
+                        if (setSeats) {
+                            if (seats.length < passengers.length) {
+                                setSeats([...seats, {
+                                    firstName: passengers[seats.length].firstName,
+                                    lastName: passengers[seats.length].lastName,
+                                    rowNum,
+                                    seatLetter: businessSeatLetters[i]
+                                }])
+                            } else {
+                                setSeats([...seats.filter(item => seats.indexOf(item) !== 0), {
+                                    firstName: seats[0].firstName,
+                                    lastName: seats[0].lastName,
+                                    rowNum,
+                                    seatLetter: businessSeatLetters[i]
+                                }])
+                            }
                         }
-
                     }}
                 >
                     <Rect
@@ -147,40 +150,42 @@ const SeatsRender = ({ seats, setSeats, random }) => {
                         container.style.cursor = "default";
                     }}
                     onClick={() => {
-                        if (seats.length < passengers.length) {
-                            setSeats([...seats, {
-                                firstName: passengers[seats.length].firstName,
-                                lastName: passengers[seats.length].lastName,
-                                rowNum,
-                                seatLetter: economySeatLetters[i]
-                            }])
-                        } else {
-                            setSeats([...seats.filter(item => seats.indexOf(item) !== 0), {
-                                firstName: seats[0].firstName,
-                                lastName: seats[0].lastName,
-                                rowNum,
-                                seatLetter: economySeatLetters[i]
-                            }])
+                        if (setSeats) {
+                            if (seats.length < passengers.length) {
+                                setSeats([...seats, {
+                                    firstName: passengers[seats.length].firstName,
+                                    lastName: passengers[seats.length].lastName,
+                                    rowNum,
+                                    seatLetter: economySeatLetters[i]
+                                }])
+                            } else {
+                                setSeats([...seats.filter(item => seats.indexOf(item) !== 0), {
+                                    firstName: seats[0].firstName,
+                                    lastName: seats[0].lastName,
+                                    rowNum,
+                                    seatLetter: economySeatLetters[i]
+                                }])
+                            }
                         }
-
                     }}
                     onTap={() => {
-                        if (seats.length < passengers.length) {
-                            setSeats([...seats, {
-                                firstName: passengers[seats.length].firstName,
-                                lastName: passengers[seats.length].lastName,
-                                rowNum,
-                                seatLetter: economySeatLetters[i]
-                            }])
-                        } else {
-                            setSeats([...seats.filter(item => seats.indexOf(item) !== 0), {
-                                firstName: seats[0].firstName,
-                                lastName: seats[0].lastName,
-                                rowNum,
-                                seatLetter: economySeatLetters[i]
-                            }])
+                        if (setSeats) {
+                            if (seats.length < passengers.length) {
+                                setSeats([...seats, {
+                                    firstName: passengers[seats.length].firstName,
+                                    lastName: passengers[seats.length].lastName,
+                                    rowNum,
+                                    seatLetter: economySeatLetters[i]
+                                }])
+                            } else {
+                                setSeats([...seats.filter(item => seats.indexOf(item) !== 0), {
+                                    firstName: seats[0].firstName,
+                                    lastName: seats[0].lastName,
+                                    rowNum,
+                                    seatLetter: economySeatLetters[i]
+                                }])
+                            }
                         }
-
                     }}
                 >
                     <Rect

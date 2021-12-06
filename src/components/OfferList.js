@@ -74,6 +74,7 @@ const OfferList = () => {
                                     at: formatTime(segment.arrival.at)
                                 }
                             }
+                            return null
                         }).filter(stop => stop),
                         stopsBack: item.itineraries[1].segments.map(segment => {
                             if (segment.arrival.iataCode !== trip.dept.iata) {
@@ -82,6 +83,7 @@ const OfferList = () => {
                                     at: formatTime(segment.arrival.at)
                                 }
                             }
+                            return null
                         }).filter(stop => stop),
                         depTimeOut: formatTime(item.itineraries[0].segments[0].departure.at),
                         arrTimeOut: formatTime(item.itineraries[0].segments.at(-1).arrival.at),
@@ -95,6 +97,7 @@ const OfferList = () => {
                 )
             })
             .catch(err => console.log(err))
+        // eslint-disable-next-line
     }, [])
 
     useEffect(() => {

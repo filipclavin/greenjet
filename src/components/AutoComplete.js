@@ -66,6 +66,7 @@ function useOutsideAlerter(ref, onOutsideClick) {
         return () => {
             document.removeEventListener("mousedown", handleClickOutside);
         };
+        // eslint-disable-next-line
     }, [ref]);
 }
 

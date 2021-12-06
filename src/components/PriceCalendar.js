@@ -115,7 +115,7 @@ const PriceCalendar = () => {
         for (let i = -2; i < 3; i++) {
             let date = new Date(baseDate)
             date.setDate(date.getDate() + i)
-            dates.push(<p className='date'>{date.getDate()}</p>)
+            dates.push(<p className='date' key={date.getDate()}>{date.getDate()}</p>)
         }
 
         return dates
